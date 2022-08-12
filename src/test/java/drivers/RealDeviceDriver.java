@@ -17,54 +17,52 @@ import java.net.URL;
 
 import static org.apache.commons.io.FileUtils.copyInputStreamToFile;
 
-public class RealDeviceDriver implements WebDriverProvider{
-  File app = getApp();
-
+public class RealDeviceDriver implements WebDriverProvider {
 
   @Override
-    public WebDriver createDriver(Capabilities capabilities) {
+  public WebDriver createDriver(Capabilities capabilities) {
 
-      RealDeviceConfig config = ConfigFactory.create(RealDeviceConfig.class, System.getProperties());
-      String platformName = config.platformName();
-      String deviceName = config.deviceName();
-      String osVersion = config.osVersion();
+    RealDeviceConfig config = ConfigFactory.create(RealDeviceConfig.class, System.getProperties());
+    String platformName = config.platformName();
+    String deviceName = config.deviceName();
+    String osVersion = config.osVersion();
+
+    File app = getApp();
+    UiAutomator2Options options = new UiAutomator2Options();
+    options.merge(capabilities);
+    options.setAutomationName(AutomationName.ANDROID_UIAUTOMATOR2);
+    options.setPlatformName(platformName);
+    options.setDeviceName(deviceName);
+    options.setPlatformVersion(osVersion);
+    options.setApp(app.getAbsolutePath());
+    options.setAppPackage("org.wikipedia.alpha");
+    options.setAppActivity("org.wikipedia.main.MainActivity");
 
 
-      UiAutomator2Options options = new UiAutomator2Options();
-      options.merge(capabilities);
-      options.setAutomationName(AutomationName.ANDROID_UIAUTOMATOR2);
-      options.setPlatformName(platformName);
-      options.setDeviceName(deviceName);
-      options.setPlatformVersion(osVersion);
-      options.setApp(app.getAbsolutePath());
-      options.setAppPackage("org.wikipedia.alpha");
-      options.setAppActivity("org.wikipedia.main.MainActivity");
+    return new AndroidDriver(getAppiumServerUrl(), options);
+  }
 
-
-      return new AndroidDriver(getAppiumServerUrl(), options);
+  public static URL getAppiumServerUrl() {
+    try {
+      return new URL("http://localhost:4723/wd/hub");
+    } catch (MalformedURLException e) {
+      throw new RuntimeException(e);
     }
+  }
 
-    public static URL getAppiumServerUrl() {
-      try {
-        return new URL("http://localhost:4723/wd/hub");
-      } catch (MalformedURLException e) {
-        throw new RuntimeException(e);
+  private File getApp() {
+    String appUrl = "https://github.com/wikimedia/apps-android-wikipedia/" +
+            "releases/download/latest/app-alpha-universal-release.apk";
+    String appPath = "src/test/resources/apps/app-alpha-universal-release.apk";
+
+    File app = new File(appPath);
+    if (!app.exists()) {
+      try (InputStream in = new URL(appUrl).openStream()) {
+        copyInputStreamToFile(in, app);
+      } catch (IOException e) {
+        throw new AssertionError("Failed to download application", e);
       }
     }
-
-    private File getApp() {
-      String appUrl = "https://github.com/wikimedia/apps-android-wikipedia/" +
-              "releases/download/latest/app-alpha-universal-release.apk";
-      String appPath = "src/test/resources/apps/app-alpha-universal-release.apk";
-
-      File app = new File(appPath);
-      if (!app.exists()) {
-        try (InputStream in = new URL(appUrl).openStream()) {
-          copyInputStreamToFile(in, app);
-        } catch (IOException e) {
-          throw new AssertionError("Failed to download application", e);
-        }
-      }
-      return app;
-    }
+    return app;
+  }
 }

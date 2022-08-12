@@ -20,9 +20,6 @@ import static org.apache.commons.io.FileUtils.copyInputStreamToFile;
 
 public class EmulatorMobileDriver implements WebDriverProvider {
 
-  File app = getApp();
-
-
   @Override
   public WebDriver createDriver(Capabilities capabilities) {
 
@@ -31,7 +28,7 @@ public class EmulatorMobileDriver implements WebDriverProvider {
     String deviceName = config.deviceNameEm();
     String osVersion = config.osVersionEm();
 
-
+    File app = getApp();
     UiAutomator2Options options = new UiAutomator2Options();
     options.merge(capabilities);
     options.setAutomationName(AutomationName.ANDROID_UIAUTOMATOR2);
