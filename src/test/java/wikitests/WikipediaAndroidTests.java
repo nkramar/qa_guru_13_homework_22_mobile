@@ -13,29 +13,29 @@ public class WikipediaAndroidTests extends TestBase {
   @DisplayName("Check main texts on 4 screens")
   void checkPrimaryTextsOnScreens() {
 
-    step("Check the text on the first screen", () -> {
+    step("Check text on first screen", () -> {
       wikiOnBoardingPage.shouldHavePrimaryText(wikiOnBoardingPage.textOnFirstScreen);
     });
 
     step("Click on 'continue' button", () ->
             wikiOnBoardingPage.clickContinueButton());
 
-    step("Check the text on the second screen", () -> {
+    step("Check text on second screen", () -> {
       wikiOnBoardingPage.shouldHavePrimaryText(wikiOnBoardingPage.textOnSecondScreen);
     });
 
     step("Click on 'continue' button", () ->
             wikiOnBoardingPage.clickContinueButton());
 
-    step("Check the text on the third screen", () -> {
+    step("Check text on third screen", () -> {
       wikiOnBoardingPage.shouldHavePrimaryText(wikiOnBoardingPage.textOnThirdScreen);
     });
 
     step("Click on 'continue' button", () ->
             wikiOnBoardingPage.clickContinueButton());
 
-    step("Check the text on forth screen", () -> {
-      wikiOnBoardingPage.shouldHavePrimaryText(wikiOnBoardingPage.textOnForthScreen);
+    step("Check text on fourth screen", () -> {
+      wikiOnBoardingPage.shouldHavePrimaryText(wikiOnBoardingPage.textOnFourthScreen);
     });
   }
 
@@ -60,11 +60,11 @@ public class WikipediaAndroidTests extends TestBase {
       wikiAddLanguagesPage.checkListOfAddedLanguages();
     });
 
-    step("Go back to the first screen", () -> {
+    step("Go back to first screen", () -> {
       wikiAddLanguagesPage.clickBackButton();
     });
 
-    step("Check that the list of languages was increased to 2 items", () -> {
+    step("Check that list of languages was increased to 2 items", () -> {
       wikiAddLanguagesPage.checkTheSizeOfLanguagesList();
     });
   }

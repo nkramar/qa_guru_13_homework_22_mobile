@@ -15,7 +15,7 @@ public class WikiOnBoardingPage {
   public String textOnFirstScreen = "The Free Encyclopedia …in over 300 languages",
           textOnSecondScreen = "New ways to explore",
           textOnThirdScreen = "Reading lists with sync",
-          textOnForthScreen = "Send anonymous data";
+          textOnFourthScreen = "Send anonymous data";
 
 
   public WikiOnBoardingPage shouldHavePrimaryText(String value) {
