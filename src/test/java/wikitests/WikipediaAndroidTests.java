@@ -17,22 +17,22 @@ public class WikipediaAndroidTests extends TestBase {
       wikiOnBoardingPage.shouldHavePrimaryText(wikiOnBoardingPage.textOnFirstScreen);
     });
 
-    step("Click on 'continue' button", () ->
-            wikiOnBoardingPage.clickContinueButton());
+    step("Click on 'continue' button", () ->{
+            wikiOnBoardingPage.clickContinueButton();});
 
     step("Check text on second screen", () -> {
       wikiOnBoardingPage.shouldHavePrimaryText(wikiOnBoardingPage.textOnSecondScreen);
     });
 
-    step("Click on 'continue' button", () ->
-            wikiOnBoardingPage.clickContinueButton());
+    step("Click on 'continue' button", () ->{
+            wikiOnBoardingPage.clickContinueButton();});
 
     step("Check text on third screen", () -> {
       wikiOnBoardingPage.shouldHavePrimaryText(wikiOnBoardingPage.textOnThirdScreen);
     });
 
-    step("Click on 'continue' button", () ->
-            wikiOnBoardingPage.clickContinueButton());
+    step("Click on 'continue' button", () ->{
+            wikiOnBoardingPage.clickContinueButton();});
 
     step("Check text on fourth screen", () -> {
       wikiOnBoardingPage.shouldHavePrimaryText(wikiOnBoardingPage.textOnFourthScreen);
